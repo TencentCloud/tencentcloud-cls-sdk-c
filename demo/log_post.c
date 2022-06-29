@@ -75,15 +75,15 @@ void post_logs()
         char indexStr[32];
         sprintf(indexStr, "%d", i);
 
-        int rst = PostClsLog(client, 20, "content_key_1", "value_1",
-                             "content_key_2", "value_2!@#$%^&*()_+",
-                             "content_key_3", "value_3!@#$%^&*()_+",
-                             "content_key_4", "value_4!@#$%^&*()_+",
-                             "content_key_5", "value_5!@#$%^&*()_+",
-                             "content_key_6", "value_6!@#$%^&*()_+",
-                             "content_key_7", "value_7!@#$%^&*()_+",
-                             "content_key_8", "value_8!@#$%^&*()_+",
-                             "content_key_9", "value_9!@#$%^&*()_+",
+        int rst = PostClsLog(client, 20, "key1", "value_1",
+                             "key2", "value_2",
+                             "key3", "value_3",
+                             "key4", "value_4",
+                             "key5", "value_5",
+                             "key6", "value_6",
+                             "key7", "value_7",
+                             "key8", "value_8",
+                             "key9", "value_9",
                              "index", indexStr);
         if (rst != LOG_PRODUCER_OK)
         {
