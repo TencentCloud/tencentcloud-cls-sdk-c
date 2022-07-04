@@ -181,6 +181,19 @@ post_log_demo/fast:
 	$(MAKE) -f demo/CMakeFiles/post_log_demo.dir/build.make demo/CMakeFiles/post_log_demo.dir/build
 .PHONY : post_log_demo/fast
 
+#=============================================================================
+# Target rules for targets named search_log_demo
+
+# Build rule for target.
+search_log_demo: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 search_log_demo
+.PHONY : search_log_demo
+
+# fast build rule for target.
+search_log_demo/fast:
+	$(MAKE) -f demo/CMakeFiles/search_log_demo.dir/build.make demo/CMakeFiles/search_log_demo.dir/build
+.PHONY : search_log_demo/fast
+
 # target to build an object file
 src/cls_log.o:
 	$(MAKE) -f CMakeFiles/cls_log_csdk.dir/build.make CMakeFiles/cls_log_csdk.dir/src/cls_log.o
@@ -523,6 +536,24 @@ src/signature.s:
 	$(MAKE) -f CMakeFiles/cls_log_csdk_static.dir/build.make CMakeFiles/cls_log_csdk_static.dir/src/signature.s
 .PHONY : src/signature.s
 
+# target to build an object file
+src/utils.o:
+	$(MAKE) -f CMakeFiles/cls_log_csdk.dir/build.make CMakeFiles/cls_log_csdk.dir/src/utils.o
+	$(MAKE) -f CMakeFiles/cls_log_csdk_static.dir/build.make CMakeFiles/cls_log_csdk_static.dir/src/utils.o
+.PHONY : src/utils.o
+
+# target to preprocess a source file
+src/utils.i:
+	$(MAKE) -f CMakeFiles/cls_log_csdk.dir/build.make CMakeFiles/cls_log_csdk.dir/src/utils.i
+	$(MAKE) -f CMakeFiles/cls_log_csdk_static.dir/build.make CMakeFiles/cls_log_csdk_static.dir/src/utils.i
+.PHONY : src/utils.i
+
+# target to generate assembly for a file
+src/utils.s:
+	$(MAKE) -f CMakeFiles/cls_log_csdk.dir/build.make CMakeFiles/cls_log_csdk.dir/src/utils.s
+	$(MAKE) -f CMakeFiles/cls_log_csdk_static.dir/build.make CMakeFiles/cls_log_csdk_static.dir/src/utils.s
+.PHONY : src/utils.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -538,6 +569,7 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... post_log_demo"
+	@echo "... search_log_demo"
 	@echo "... src/cls_log.o"
 	@echo "... src/cls_log.i"
 	@echo "... src/cls_log.s"
@@ -595,6 +627,9 @@ help:
 	@echo "... src/signature.o"
 	@echo "... src/signature.i"
 	@echo "... src/signature.s"
+	@echo "... src/utils.o"
+	@echo "... src/utils.i"
+	@echo "... src/utils.s"
 .PHONY : help
 
 

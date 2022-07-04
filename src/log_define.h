@@ -15,14 +15,15 @@
 #define LOG_GLOBAL_NOTHING (0)
 
 
-struct _post_result
+struct result
 {
     int statusCode;
-    char * errorMessage;
+    char * message;
     char * requestID;
 };
 
-typedef struct _post_result post_result;
+typedef struct result post_result;
+typedef struct result get_result;
 
 
 #endif
