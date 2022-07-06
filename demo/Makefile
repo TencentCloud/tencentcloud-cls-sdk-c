@@ -156,6 +156,20 @@ post_log_demo/fast:
 	cd /home/herrylv/tencentcloud-cls-sdk-c/tencentcloud-cls-sdk-c && $(MAKE) -f demo/CMakeFiles/post_log_demo.dir/build.make demo/CMakeFiles/post_log_demo.dir/build
 .PHONY : post_log_demo/fast
 
+# Convenience name for target.
+demo/CMakeFiles/search_log_demo.dir/rule:
+	cd /home/herrylv/tencentcloud-cls-sdk-c/tencentcloud-cls-sdk-c && $(MAKE) -f CMakeFiles/Makefile2 demo/CMakeFiles/search_log_demo.dir/rule
+.PHONY : demo/CMakeFiles/search_log_demo.dir/rule
+
+# Convenience name for target.
+search_log_demo: demo/CMakeFiles/search_log_demo.dir/rule
+.PHONY : search_log_demo
+
+# fast build rule for target.
+search_log_demo/fast:
+	cd /home/herrylv/tencentcloud-cls-sdk-c/tencentcloud-cls-sdk-c && $(MAKE) -f demo/CMakeFiles/search_log_demo.dir/build.make demo/CMakeFiles/search_log_demo.dir/build
+.PHONY : search_log_demo/fast
+
 # target to build an object file
 log_post.o:
 	cd /home/herrylv/tencentcloud-cls-sdk-c/tencentcloud-cls-sdk-c && $(MAKE) -f demo/CMakeFiles/post_log_demo.dir/build.make demo/CMakeFiles/post_log_demo.dir/log_post.o
@@ -171,6 +185,21 @@ log_post.s:
 	cd /home/herrylv/tencentcloud-cls-sdk-c/tencentcloud-cls-sdk-c && $(MAKE) -f demo/CMakeFiles/post_log_demo.dir/build.make demo/CMakeFiles/post_log_demo.dir/log_post.s
 .PHONY : log_post.s
 
+# target to build an object file
+log_search.o:
+	cd /home/herrylv/tencentcloud-cls-sdk-c/tencentcloud-cls-sdk-c && $(MAKE) -f demo/CMakeFiles/search_log_demo.dir/build.make demo/CMakeFiles/search_log_demo.dir/log_search.o
+.PHONY : log_search.o
+
+# target to preprocess a source file
+log_search.i:
+	cd /home/herrylv/tencentcloud-cls-sdk-c/tencentcloud-cls-sdk-c && $(MAKE) -f demo/CMakeFiles/search_log_demo.dir/build.make demo/CMakeFiles/search_log_demo.dir/log_search.i
+.PHONY : log_search.i
+
+# target to generate assembly for a file
+log_search.s:
+	cd /home/herrylv/tencentcloud-cls-sdk-c/tencentcloud-cls-sdk-c && $(MAKE) -f demo/CMakeFiles/search_log_demo.dir/build.make demo/CMakeFiles/search_log_demo.dir/log_search.s
+.PHONY : log_search.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -184,9 +213,13 @@ help:
 	@echo "... list_install_components"
 	@echo "... post_log_demo"
 	@echo "... rebuild_cache"
+	@echo "... search_log_demo"
 	@echo "... log_post.o"
 	@echo "... log_post.i"
 	@echo "... log_post.s"
+	@echo "... log_search.o"
+	@echo "... log_search.i"
+	@echo "... log_search.s"
 .PHONY : help
 
 
