@@ -171,8 +171,8 @@ void _adjust_buffer(log_buffer *tag, uint32_t new_len)
         tag->max_buffer_len = new_len << 2;
         tag->now_buffer = tag->buffer;
         tag->now_buffer_len = 0;
-        tag->buf_index = (int*)malloc(new_len << 2);
-        memset(tag->buf_index,0,new_len << 2);
+        tag->buf_index = (int *)malloc(new_len << 2);
+        memset(tag->buf_index, 0, new_len << 2);
         return;
     }
     uint32_t new_buffer_len = tag->max_buffer_len << 1;
@@ -183,7 +183,7 @@ void _adjust_buffer(log_buffer *tag, uint32_t new_len)
     }
 
     tag->buffer = (char *)realloc(tag->buffer, new_buffer_len);
-    tag->buf_index = (int*)realloc(tag->buf_index, new_buffer_len);
+    tag->buf_index = (int *)realloc(tag->buf_index, new_buffer_len);
     tag->now_buffer = tag->buffer + tag->now_buffer_len;
     tag->max_buffer_len = new_buffer_len;
 }
@@ -341,13 +341,17 @@ static uint32_t _log_pack(log_group *grp, uint8_t *buf)
 lz4_content *SerializeWithNolz4(log_group_builder *bder)
 {
     log_buffer *log = &(bder->grp->logs);
-    int log_count =bder->grp->logs_count;
+    int log_count = bder->grp->logs_count;
     Cls__Log **pcls_log = (Cls__Log **)malloc(sizeof(Cls__Log *) * bder->grp->logs_count);
+    uint8_t *data = log->buffer;
     int i = 0;
-    for(; i < bder->grp->logs_count; ++i){
+    for (; i < bder->grp->logs_count; ++i)
+    {
         pcls_log[i] = (Cls__Log *)malloc(sizeof(Cls__Log));
-        pcls_log[i] = cls__log__unpack(NULL, (log->buf_index)[i], log->buffer);
-        if(pcls_log[i] == NULL){
+        pcls_log[i] = cls__log__unpack(NULL, (log->buf_index)[i], data);
+        data += (log->buf_index)[i];
+        if (pcls_log[i] == NULL)
+        {
             return NULL;
         }
     }
@@ -356,7 +360,8 @@ lz4_content *SerializeWithNolz4(log_group_builder *bder)
     Cls__LogGroup **loggroups = malloc(sizeof(Cls__LogGroup *));
     loggroups[0] = malloc(sizeof(Cls__LogGroup));
     cls__log_group__init(loggroups[0]);
-    loggroups[0]->logs_count = bder->grp->logs_count;;
+    loggroups[0]->logs_count = bder->grp->logs_count;
+    ;
     loggroups[0]->logs = pcls_log;
     pbLogGroup.loggrouplist = loggroups;
     pbLogGroup.n_loggrouplist = 1;
@@ -372,7 +377,7 @@ lz4_content *SerializeWithNolz4(log_group_builder *bder)
 
     for (i = 0; i < log_count; ++i)
     {
-        cls__log__free_unpacked(pcls_log[i],NULL);
+        cls__log__free_unpacked(pcls_log[i], NULL);
     }
     free(pcls_log);
     free(loggroups[0]);
@@ -384,13 +389,17 @@ lz4_content *SerializeWithlz4(log_group_builder *bder)
 {
 
     log_buffer *log = &(bder->grp->logs);
-    int log_count =bder->grp->logs_count;
+    int log_count = bder->grp->logs_count;
     Cls__Log **pcls_log = (Cls__Log **)malloc(sizeof(Cls__Log *) * bder->grp->logs_count);
+    uint8_t *data = log->buffer;
     int i = 0;
-    for(; i < bder->grp->logs_count; ++i){
+    for (; i < bder->grp->logs_count; ++i)
+    {
         pcls_log[i] = (Cls__Log *)malloc(sizeof(Cls__Log));
-        pcls_log[i] = cls__log__unpack(NULL, (log->buf_index)[i], log->buffer);
-        if(pcls_log[i] == NULL){
+        pcls_log[i] = cls__log__unpack(NULL, (log->buf_index)[i], data);
+        data += (log->buf_index)[i];
+        if (pcls_log[i] == NULL)
+        {
             return NULL;
         }
     }
@@ -399,7 +408,8 @@ lz4_content *SerializeWithlz4(log_group_builder *bder)
     Cls__LogGroup **loggroups = malloc(sizeof(Cls__LogGroup *));
     loggroups[0] = malloc(sizeof(Cls__LogGroup));
     cls__log_group__init(loggroups[0]);
-    loggroups[0]->logs_count = bder->grp->logs_count;;
+    loggroups[0]->logs_count = bder->grp->logs_count;
+    ;
     loggroups[0]->logs = pcls_log;
     pbLogGroup.loggrouplist = loggroups;
     pbLogGroup.n_loggrouplist = 1;
@@ -429,17 +439,14 @@ lz4_content *SerializeWithlz4(log_group_builder *bder)
 
     for (i = 0; i < log_count; ++i)
     {
-        cls__log__free_unpacked(pcls_log[i],NULL);
+        cls__log__free_unpacked(pcls_log[i], NULL);
     }
     free(pcls_log);
     free(loggroups[0]);
     free(loggroups);
 
-
     return pLogbuf;
 }
-
-
 
 void FreeLogBuf(lz4_content *pBuf)
 {
@@ -449,10 +456,9 @@ void FreeLogBuf(lz4_content *pBuf)
 #ifdef LOG_KEY_VALUE_FLAG
 
 void InnerAddLog(log_group_builder *bder, int64_t logTime,
-                        int32_t pair_count, char **keys, int32_t *key_lens,
-                        char **values, int32_t *val_lens)
+                 int32_t pair_count, char **keys, int32_t *key_lens,
+                 char **values, int32_t *val_lens)
 {
-    
 
     Cls__Log cls_log = CLS__LOG__INIT;
     Cls__Log__Content **content = malloc(sizeof(Cls__Log__Content *) * pair_count);
@@ -467,10 +473,11 @@ void InnerAddLog(log_group_builder *bder, int64_t logTime,
     cls_log.n_contents = pair_count;
     cls_log.contents = content;
     cls_log.time = logTime;
-    if(cls_log.time == 0){
+    if (cls_log.time == 0)
+    {
         struct timeval t;
         gettimeofday(&t, 0);
-        cls_log.time = (long)((long)t.tv_sec * 1000 + t.tv_usec/1000);
+        cls_log.time = (long)((long)t.tv_sec * 1000 + t.tv_usec / 1000);
     }
     //序列化
     unsigned len = cls__log__get_packed_size(&cls_log);
@@ -506,6 +513,5 @@ void InnerAddLog(log_group_builder *bder, int64_t logTime,
     }
     free(content);
 }
-
 
 #endif
