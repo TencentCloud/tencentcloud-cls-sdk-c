@@ -347,7 +347,6 @@ lz4_content *SerializeWithNolz4(log_group_builder *bder)
     int i = 0;
     for (; i < bder->grp->logs_count; ++i)
     {
-        pcls_log[i] = (Cls__Log *)malloc(sizeof(Cls__Log));
         pcls_log[i] = cls__log__unpack(NULL, (log->buf_index)[i], data);
         data += (log->buf_index)[i];
         if (pcls_log[i] == NULL)
@@ -395,7 +394,6 @@ lz4_content *SerializeWithlz4(log_group_builder *bder)
     int i = 0;
     for (; i < bder->grp->logs_count; ++i)
     {
-        pcls_log[i] = (Cls__Log *)malloc(sizeof(Cls__Log));
         pcls_log[i] = cls__log__unpack(NULL, (log->buf_index)[i], data);
         data += (log->buf_index)[i];
         if (pcls_log[i] == NULL)
