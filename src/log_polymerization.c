@@ -360,8 +360,8 @@ lz4_content *SerializeWithNolz4(log_group_builder *bder)
     loggroups[0] = malloc(sizeof(Cls__LogGroup));
     cls__log_group__init(loggroups[0]);
     loggroups[0]->logs_count = bder->grp->logs_count;
-    ;
     loggroups[0]->logs = pcls_log;
+    loggroups[0]->source = bder->grp->source;
     pbLogGroup.loggrouplist = loggroups;
     pbLogGroup.n_loggrouplist = 1;
     unsigned len = cls__log_group_list__get_packed_size(&pbLogGroup);
@@ -407,8 +407,8 @@ lz4_content *SerializeWithlz4(log_group_builder *bder)
     loggroups[0] = malloc(sizeof(Cls__LogGroup));
     cls__log_group__init(loggroups[0]);
     loggroups[0]->logs_count = bder->grp->logs_count;
-    ;
     loggroups[0]->logs = pcls_log;
+    loggroups[0]->source = bder->grp->source;
     pbLogGroup.loggrouplist = loggroups;
     pbLogGroup.n_loggrouplist = 1;
     unsigned len = cls__log_group_list__get_packed_size(&pbLogGroup);
