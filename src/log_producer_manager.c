@@ -422,7 +422,10 @@ int log_producer_manager_add_log_int32(ProducerManager *producermgr,
 {
     LOG_PRODUCER_MANAGER_ADD_LOG_BEGIN;
 
-    InnerAddLog(producermgr->builder, (uint32_t)time(NULL), pair_count, keys, key_lens, values, val_lens);
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    int64_t now_ms = (int64_t)tv.tv_sec * 1000 + tv.tv_usec / 1000;
+    InnerAddLog(producermgr->builder, now_ms, pair_count, keys, key_lens, values, val_lens);
 
     LOG_PRODUCER_MANAGER_ADD_LOG_END;
 }
